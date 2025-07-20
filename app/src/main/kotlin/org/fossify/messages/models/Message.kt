@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.fossify.commons.models.SimpleContact
+import org.fossify.messages.extensions.virustotal.VirusTotal
 
 @Entity(tableName = "messages")
 data class Message(
@@ -22,7 +23,8 @@ data class Message(
     @ColumnInfo(name = "sender_name") var senderName: String,
     @ColumnInfo(name = "sender_photo_uri") val senderPhotoUri: String,
     @ColumnInfo(name = "subscription_id") var subscriptionId: Int,
-    @ColumnInfo(name = "is_scheduled") var isScheduled: Boolean = false
+    @ColumnInfo(name = "is_scheduled") var isScheduled: Boolean = false,
+    @ColumnInfo(name = "scan_result") var scanResult: VirusTotal.ScanResult = VirusTotal.ScanResult.Unknown
 ) : ThreadItem() {
 
     fun isReceivedMessage() = type == Telephony.Sms.MESSAGE_TYPE_INBOX
@@ -63,7 +65,8 @@ data class Message(
                 old.senderPhoneNumber == new.senderPhoneNumber &&
                 old.senderName == new.senderName &&
                 old.senderPhotoUri == new.senderPhotoUri &&
-                old.isScheduled == new.isScheduled
+                old.isScheduled == new.isScheduled &&
+                old.scanResult == new.scanResult
         }
     }
 }

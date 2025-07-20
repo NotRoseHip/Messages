@@ -11,5 +11,5 @@ sealed class ThreadItem {
     data class ThreadError(val messageId: Long, val messageText: String) : ThreadItem()
     data class ThreadSent(val messageId: Long, val delivered: Boolean) : ThreadItem()
     data class ThreadSending(val messageId: Long) : ThreadItem()
-    data class ThreadScan(val item: ItemMessageBinding) : ThreadItem()
+    data class ThreadScan(val item: ItemMessageBinding, val message: Message) : ThreadItem()
 }

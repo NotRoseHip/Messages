@@ -673,7 +673,7 @@ class ThreadActivity : SimpleActivity() {
         when {
             any is Message && any.isScheduled -> showScheduledMessageInfo(any)
             any is ThreadScan && config.virusTotalApiKey.isNotEmpty() -> {
-                VirusTotal.scanMessageURL(any.item)
+                VirusTotal.scanMessageURL(any.item, any.message, this)
             }
             any is ThreadError -> {
                 binding.messageHolder.threadTypeMessage.setText(any.messageText)
@@ -1627,6 +1627,10 @@ class ThreadActivity : SimpleActivity() {
         binding.messageHolder.threadTypeMessage.setText("")
         getAttachmentsAdapter()?.clear()
         checkSendMessageAvailability()
+    }
+
+    fun updateMessage(message: Message) {
+        insertOrUpdateMessage(message)
     }
 
     private fun insertOrUpdateMessage(message: Message) {

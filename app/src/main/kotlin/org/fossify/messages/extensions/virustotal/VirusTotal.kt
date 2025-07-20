@@ -1,5 +1,6 @@
 package org.fossify.messages.extensions.virustotal
 
+import android.content.Context
 import android.text.Spanned
 import android.text.style.URLSpan
 import android.text.util.Linkify
@@ -14,12 +15,14 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.fossify.commons.extensions.beVisible
 import org.fossify.messages.R
+import org.fossify.messages.activities.ThreadActivity
 import org.fossify.messages.databinding.ItemMessageBinding
 import org.fossify.messages.extensions.gson.gson
 import org.fossify.messages.extensions.virustotal.common.Results
 import org.fossify.messages.extensions.virustotal.common.Scanner
 import org.fossify.messages.extensions.virustotal.common.getScannerResult
 import org.fossify.messages.extensions.virustotal.common.memberNames
+import org.fossify.messages.models.Message
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -47,7 +50,7 @@ object VirusTotal {
         Unknown
     }
 
-    private fun clickableLinks(longText: CharSequence) : Array<out URLSpan>? {
+    fun clickableLinks(longText: CharSequence) : Array<out URLSpan> {
         return try {
             (longText as Spanned).getSpans(0, longText.length, URLSpan::class.java)
         } catch (e: Exception) {
@@ -86,29 +89,39 @@ object VirusTotal {
         }
     }
 
-    fun scanMessageURL(item : ItemMessageBinding) {
-        clickableLinks(item.threadMessageBody.text)?.forEach {
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = requestGetURL(it.url)
-                withContext(Dispatchers.Main) {
-                    item.threadUrlsScanResult.apply {
-                        beVisible()
-                        when(response) {
-                            ScanResult.Malicious -> setImageResource(R.drawable.scan_malicious)
-                            ScanResult.Suspicious, ScanResult.Spam -> setImageResource(R.drawable.scan_spam)
-                            ScanResult.Phishing -> setImageResource(R.drawable.scan_phishing)
-                            ScanResult.Clean -> setImageResource(R.drawable.scan_safe)
-                            ScanResult.Unknown -> setImageResource(R.drawable.scan_unknown)
-                        }
-                    }
-                    item.threadMessageBody.apply {
-                        when(response) {
-                            ScanResult.Malicious, ScanResult.Suspicious, ScanResult.Phishing, ScanResult.Spam -> {
-                                autoLinkMask = Linkify.EMAIL_ADDRESSES
-                                text = text
-                            }
-                            else -> {} //TODO()
-                        }
+    fun applyResultGraphics(item: ItemMessageBinding, message: Message) {
+        item.threadUrlsScanResult.apply {
+            when (message.scanResult) {
+                ScanResult.Malicious -> setImageResource(R.drawable.scan_malicious)
+                ScanResult.Suspicious, ScanResult.Spam -> setImageResource(R.drawable.scan_spam)
+                ScanResult.Phishing -> setImageResource(R.drawable.scan_phishing)
+                ScanResult.Clean -> setImageResource(R.drawable.scan_safe)
+                ScanResult.Unknown -> setImageResource(R.drawable.scan_unknown)
+            }
+            beVisible()
+        }
+
+        item.threadMessageBody.apply {
+            when (message.scanResult) {
+                ScanResult.Malicious, ScanResult.Suspicious, ScanResult.Phishing, ScanResult.Spam -> {
+                    autoLinkMask = Linkify.EMAIL_ADDRESSES
+                    text = text
+                }
+
+                else -> {} //TODO()
+            }
+        }
+    }
+
+    fun scanMessageURL(item: ItemMessageBinding, message: Message, context: Context) {
+        val urls = clickableLinks(item.threadMessageBody.text)
+        if (urls.isNotEmpty()) {
+            urls.forEach {
+                CoroutineScope(Dispatchers.IO).launch {
+                    message.scanResult = requestGetURL(it.url)
+                    (context as ThreadActivity).updateMessage(message)
+                    withContext(Dispatchers.Main) {
+                        applyResultGraphics(item, message)
                     }
                 }
             }

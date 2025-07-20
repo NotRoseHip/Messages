@@ -315,10 +315,6 @@ class ThreadAdapter(
                 threadMessageAttachmentsHolder.beGone()
                 threadMessagePlayOutline.beGone()
             }
-
-            threadUrlsScanResult.apply {
-                beInvisible()
-            }
         }
     }
 
@@ -347,14 +343,20 @@ class ThreadAdapter(
                 setLinkTextColor(activity.getProperPrimaryColor())
 
                 setOnClickListener {
-                    holder.viewClicked(ThreadScan(messageBinding))
+                    holder.viewClicked(ThreadScan(messageBinding, message))
+                }
+
+                if (VirusTotal.clickableLinks(text).isNotEmpty()) {
+                    if (activity.config.virusTotalApiKey.isNotEmpty()) {
+                        VirusTotal.applyResultGraphics(messageBinding, message)
+                    }
                 }
             }
 
             if (activity.config.virusTotalApiKey.isNotEmpty()) {
                 if (activity.config.useVirusTotalOnConversation
                     || (activity.config.useVirusTotalOnIncoming && VirusTotal.popQueue(message.id))) {
-                    VirusTotal.scanMessageURL(messageBinding)
+                    VirusTotal.scanMessageURL(messageBinding, message, activity)
                 }
             }
 
