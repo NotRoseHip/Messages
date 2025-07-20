@@ -1,3 +1,35 @@
+# Proof Of Concept
+
+This fork is a proof of concept.
+
+This project is a fork of the Fossify Messages app project with an added functionality to scan manually or automatically URLs in SMS using the Virus Total API.
+
+### Additions to the original app:
+
+- New settings section with :
+    - Field for API key
+    - Automatic scanning
+    - Incoming automatic scanning
+- Manual scanning by tapping a message text (not the URL)
+- Scan results icons (license: [icon8](https://intercom.help/icons8-7fb7577e8170/en/articles/5534926-universal-multimedia-license-agreement-for-icons8))
+- URLs are disabled if the scan result isn't favorable
+
+### Icons signification:
+<p>
+<div align="left">
+<img title="Safe" alt="Safe" src="app/src/main/res/drawable-xxxhdpi/scan_safe.png" width="5%">Safe</br>
+<img title="Malicious" alt="Malicious" src="app/src/main/res/drawable-xxxhdpi/scan_malicious.png" width="5%">Malicious</br>
+<img title="Phishing" alt="Phishing" src="app/src/main/res/drawable-xxxhdpi/scan_phishing.png" width="5%">Phishing</br>
+<img title="Spam" alt="Spam" src="app/src/main/res/drawable-xxxhdpi/scan_spam.png" width="5%">Spam</br>
+<img title="Unknown" alt="Unknown" src="app/src/main/res/drawable-xxxhdpi/scan_unknown.png" width="5%">Unknown (not scanned or no api connection)</br>
+</div>
+</p>
+
+<div align="center">
+<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/VT_1_en-US.png" width="30%">
+</div>
+
+# 
 # Fossify Messages
 <img alt="Logo" src="graphics/icon.webp" width="120" />
 

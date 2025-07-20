@@ -116,4 +116,7 @@
     <string name="export_blocked_keywords">Ekspor kata kunci yang diblokir</string>
     <string name="import_blocked_keywords">Impor kata kunci yang diblokir</string>
     <string name="keywords">Kata kunci</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>

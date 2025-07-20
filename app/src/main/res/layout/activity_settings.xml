@@ -362,6 +362,86 @@
                 layout="@layout/divider" />
 
             <TextView
+                android:id="@+id/settings_virus_total_label"
+                style="@style/SettingsSectionLabelStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/virus_total" />
+
+            <RelativeLayout
+                android:id="@+id/settings_virus_total_api_key_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyTextView
+                    android:id="@+id/settings_virus_total_api_key_label"
+                    style="@style/SettingsTextLabelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_virus_total_api_key" />
+
+                <org.fossify.commons.views.MyEditText
+                    android:id="@+id/settings_virus_total_api_key"
+                    style="@style/SettingsTextValueStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/settings_virus_total_api_key_label"
+                    android:singleLine="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_use_virus_total_conversation_holder"
+                style="@style/SettingsHolderSwitchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_use_virus_total_on_conversation"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_virus_total_conversation_scan" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_use_virus_total_incoming_holder"
+                style="@style/SettingsHolderSwitchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyMaterialSwitch
+                    android:id="@+id/settings_use_virus_total_on_incoming"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_virus_total_incoming_scan" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_icons8_license_holder"
+                style="@style/SettingsHolderSwitchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <org.fossify.commons.views.MyTextView
+                    android:id="@+id/settings_icons8_license"
+                    style="@style/SettingsSwitchStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="email|web"
+                    android:text="@string/icons8_license" />
+
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/settings_virus_total_divider"
+                layout="@layout/divider" />
+
+            <TextView
                 android:id="@+id/settings_recycle_bin_label"
                 style="@style/SettingsSectionLabelStyle"
                 android:layout_width="match_parent"

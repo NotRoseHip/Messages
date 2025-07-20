@@ -113,4 +113,7 @@
     <string name="archive_confirmation">%sをアーカイブしてよろしいですか？</string>
     <string name="restore_whole_conversation_confirmation">この会話の全てのメッセージを復元してよろしいですか？</string>
     <string name="couldnt_download_mms">MMSをダウンロードできませんでした</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>

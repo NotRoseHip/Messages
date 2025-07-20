@@ -4,6 +4,7 @@ import android.content.Context
 import org.fossify.commons.helpers.BaseConfig
 import org.fossify.messages.extensions.getDefaultKeyboardHeight
 import org.fossify.messages.models.Conversation
+import androidx.core.content.edit
 
 class Config(context: Context) : BaseConfig(context) {
     companion object {
@@ -143,4 +144,16 @@ class Config(context: Context) : BaseConfig(context) {
         get() = prefs.getString(LAST_BLOCKED_KEYWORD_EXPORT_PATH, "")!!
         set(lastBlockedNumbersExportPath) = prefs.edit()
             .putString(LAST_BLOCKED_KEYWORD_EXPORT_PATH, lastBlockedNumbersExportPath).apply()
+
+    var virusTotalApiKey: String
+        get() = prefs.getString(VIRUS_TOTAL_API_KEY, "")!!
+        set(virusTotalApiKey) = prefs.edit() { putString(VIRUS_TOTAL_API_KEY, virusTotalApiKey) }
+
+    var useVirusTotalOnIncoming: Boolean
+        get() = prefs.getBoolean(USE_VIRUS_TOTAL_INCOMING, false)
+        set(useVirusTotalOnIncoming) = prefs.edit() { putBoolean(USE_VIRUS_TOTAL_INCOMING, useVirusTotalOnIncoming) }
+
+    var useVirusTotalOnConversation: Boolean
+        get() = prefs.getBoolean(USE_VIRUS_TOTAL_CONVERSATION, false)
+        set(useVirusTotalOnConversation) = prefs.edit() { putBoolean(USE_VIRUS_TOTAL_CONVERSATION, useVirusTotalOnConversation) }
 }

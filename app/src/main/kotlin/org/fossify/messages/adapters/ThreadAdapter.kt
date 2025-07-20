@@ -44,6 +44,7 @@ import org.fossify.messages.dialogs.DeleteConfirmationDialog
 import org.fossify.messages.dialogs.MessageDetailsDialog
 import org.fossify.messages.dialogs.SelectTextDialog
 import org.fossify.messages.extensions.*
+import org.fossify.messages.extensions.virustotal.VirusTotal
 import org.fossify.messages.helpers.*
 import org.fossify.messages.models.Attachment
 import org.fossify.messages.models.Message
@@ -140,6 +141,7 @@ class ThreadAdapter(
                 is ThreadSent -> setupThreadSuccess(itemView, item.delivered)
                 is ThreadSending -> setupThreadSending(itemView)
                 is Message -> setupView(holder, itemView, item)
+                else -> {}
             }
         }
         bindViewHolder(holder)
@@ -160,6 +162,7 @@ class ThreadAdapter(
             is ThreadSent -> THREAD_SENT_MESSAGE_SENT
             is ThreadSending -> THREAD_SENT_MESSAGE_SENDING
             is Message -> if (item.isReceivedMessage()) THREAD_RECEIVED_MESSAGE else THREAD_SENT_MESSAGE
+            else -> THREAD_RECEIVED_MESSAGE
         }
     }
 
@@ -290,7 +293,7 @@ class ThreadAdapter(
             }
 
             if (message.isReceivedMessage()) {
-                setupReceivedMessageView(messageBinding = this, message = message)
+                setupReceivedMessageView(holder, messageBinding = this, message = message)
             } else {
                 setupSentMessageView(messageBinding = this, message = message)
             }
@@ -312,10 +315,14 @@ class ThreadAdapter(
                 threadMessageAttachmentsHolder.beGone()
                 threadMessagePlayOutline.beGone()
             }
+
+            threadUrlsScanResult.apply {
+                beInvisible()
+            }
         }
     }
 
-    private fun setupReceivedMessageView(messageBinding: ItemMessageBinding, message: Message) {
+    private fun setupReceivedMessageView(holder: ViewHolder, messageBinding: ItemMessageBinding, message: Message) {
         messageBinding.apply {
             with(ConstraintSet()) {
                 clone(threadMessageHolder)
@@ -338,6 +345,17 @@ class ThreadAdapter(
                 background = AppCompatResources.getDrawable(activity, R.drawable.item_received_background)
                 setTextColor(textColor)
                 setLinkTextColor(activity.getProperPrimaryColor())
+
+                setOnClickListener {
+                    holder.viewClicked(ThreadScan(messageBinding))
+                }
+            }
+
+            if (activity.config.virusTotalApiKey.isNotEmpty()) {
+                if (activity.config.useVirusTotalOnConversation
+                    || (activity.config.useVirusTotalOnIncoming && VirusTotal.popQueue(message.id))) {
+                    VirusTotal.scanMessageURL(messageBinding)
+                }
             }
 
             if (!activity.isFinishing && !activity.isDestroyed) {
@@ -573,6 +591,7 @@ private class ThreadItemDiffCallback : DiffUtil.ItemCallback<ThreadItem>() {
             is ThreadSent -> oldItem.messageId == (newItem as ThreadSent).messageId
             is ThreadSending -> oldItem.messageId == (newItem as ThreadSending).messageId
             is Message -> Message.areItemsTheSame(oldItem, newItem as Message)
+            else -> false
         }
     }
 
@@ -584,6 +603,7 @@ private class ThreadItemDiffCallback : DiffUtil.ItemCallback<ThreadItem>() {
             is ThreadError -> oldItem.messageText == (newItem as ThreadError).messageText
             is ThreadSent -> oldItem.delivered == (newItem as ThreadSent).delivered
             is Message -> Message.areContentsTheSame(oldItem, newItem as Message)
+            else -> false
         }
     }
 }

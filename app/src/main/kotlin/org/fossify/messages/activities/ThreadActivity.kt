@@ -147,6 +147,7 @@ import org.fossify.messages.extensions.toArrayList
 import org.fossify.messages.extensions.updateConversationArchivedStatus
 import org.fossify.messages.extensions.updateLastConversationMessage
 import org.fossify.messages.extensions.updateScheduledMessagesThreadId
+import org.fossify.messages.extensions.virustotal.VirusTotal
 import org.fossify.messages.helpers.CAPTURE_AUDIO_INTENT
 import org.fossify.messages.helpers.CAPTURE_PHOTO_INTENT
 import org.fossify.messages.helpers.CAPTURE_VIDEO_INTENT
@@ -186,6 +187,7 @@ import org.fossify.messages.models.ThreadItem.ThreadError
 import org.fossify.messages.models.ThreadItem.ThreadLoading
 import org.fossify.messages.models.ThreadItem.ThreadSending
 import org.fossify.messages.models.ThreadItem.ThreadSent
+import org.fossify.messages.models.ThreadItem.ThreadScan
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -670,6 +672,9 @@ class ThreadActivity : SimpleActivity() {
     private fun handleItemClick(any: Any) {
         when {
             any is Message && any.isScheduled -> showScheduledMessageInfo(any)
+            any is ThreadScan && config.virusTotalApiKey.isNotEmpty() -> {
+                VirusTotal.scanMessageURL(any.item)
+            }
             any is ThreadError -> {
                 binding.messageHolder.threadTypeMessage.setText(any.messageText)
                 messageToResend = any.messageId

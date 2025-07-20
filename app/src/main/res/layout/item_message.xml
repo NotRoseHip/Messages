@@ -65,5 +65,18 @@
             android:textSize="@dimen/normal_text_size"
             tools:drawableEndCompat="@drawable/scheduled_message_icon"
             tools:text="Message content" />
+
+        <ImageView
+            android:id="@+id/thread_urls_scan_result"
+            android:layout_width="@dimen/scan_result_size"
+            android:layout_height="@dimen/scan_result_size"
+            android:layout_alignEnd="@+id/thread_message_body"
+            android:layout_alignTop="@+id/thread_message_body"
+            android:src="@drawable/scan_safe"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

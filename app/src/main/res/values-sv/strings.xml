@@ -119,4 +119,7 @@
     <string name="keywords">Nyckelord</string>
     <string name="export_blocked_keywords">Exportera blockerade nyckelord</string>
     <string name="import_blocked_keywords">Importera blockerade nyckelord</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>

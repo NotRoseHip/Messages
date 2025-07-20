@@ -14,6 +14,7 @@ import org.fossify.commons.helpers.ensureBackgroundThread
 import org.fossify.commons.models.PhoneNumber
 import org.fossify.commons.models.SimpleContact
 import org.fossify.messages.extensions.*
+import org.fossify.messages.extensions.virustotal.VirusTotal
 import org.fossify.messages.helpers.ReceiverUtils.isMessageFilteredOut
 import org.fossify.messages.helpers.refreshMessages
 import org.fossify.messages.models.Message
@@ -113,6 +114,9 @@ class SmsReceiver : BroadcastReceiver() {
                             subscriptionId
                         )
                     context.messagesDB.insertOrUpdate(message)
+                    if (context.config.useVirusTotalOnIncoming) {
+                        VirusTotal.pushQueue(message.id)
+                    }
                     if (context.config.isArchiveAvailable) {
                         context.updateConversationArchivedStatus(threadId, false)
                     }

@@ -2,6 +2,7 @@ package org.fossify.messages.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.activity.result.contract.ActivityResultContracts
 import org.fossify.commons.activities.ManageBlockedNumbersActivity
 import org.fossify.commons.dialogs.ChangeDateTimeFormatDialog
@@ -40,6 +41,7 @@ import org.fossify.messages.dialogs.ExportMessagesDialog
 import org.fossify.messages.extensions.config
 import org.fossify.messages.extensions.emptyMessagesRecycleBin
 import org.fossify.messages.extensions.messagesDB
+import org.fossify.messages.extensions.virustotal.VirusTotal
 import org.fossify.messages.helpers.FILE_SIZE_100_KB
 import org.fossify.messages.helpers.FILE_SIZE_1_MB
 import org.fossify.messages.helpers.FILE_SIZE_200_KB
@@ -130,6 +132,9 @@ class SettingsActivity : SimpleActivity() {
         setupAppPasswordProtection()
         setupMessagesExport()
         setupMessagesImport()
+        setupVirusTotalApiKey()
+        setupUseVirusTotalOnConversation()
+        setupUseVirusTotalOnIncoming()
         updateTextColors(binding.settingsNestedScrollview)
 
         if (
@@ -472,4 +477,38 @@ class SettingsActivity : SimpleActivity() {
             else -> R.string.mms_file_size_limit_none
         }
     )
+
+    private fun setupVirusTotalApiKey() = binding.apply {
+        settingsVirusTotalApiKey.setText(config.virusTotalApiKey)
+        settingsVirusTotalApiKey.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                config.virusTotalApiKey = settingsVirusTotalApiKey.text.toString()
+                VirusTotal.apiKey = config.virusTotalApiKey
+                true
+            } else {
+                false
+            }
+        }
+    }
+    private fun setupUseVirusTotalOnConversation() = binding.apply {
+        updateVirusTotalButtons()
+        settingsUseVirusTotalOnConversation.isChecked = config.useVirusTotalOnConversation
+        settingsUseVirusTotalConversationHolder.setOnClickListener {
+            settingsUseVirusTotalOnConversation.toggle()
+            config.useVirusTotalOnConversation = settingsUseVirusTotalOnConversation.isChecked
+            updateVirusTotalButtons()
+        }
+    }
+
+    private fun updateVirusTotalButtons() = binding.apply {
+        settingsUseVirusTotalIncomingHolder.beVisibleIf(!config.useVirusTotalOnConversation)
+    }
+
+    private fun setupUseVirusTotalOnIncoming() = binding.apply {
+        settingsUseVirusTotalOnIncoming.isChecked = config.useVirusTotalOnIncoming
+        settingsUseVirusTotalIncomingHolder.setOnClickListener {
+            settingsUseVirusTotalOnIncoming.toggle()
+            config.useVirusTotalOnIncoming = settingsUseVirusTotalOnIncoming.isChecked
+        }
+    }
 }

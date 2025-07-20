@@ -14,4 +14,6 @@
     <dimen name="attachment_button_height">96dp</dimen>
     <dimen name="attachment_button_width">90dp</dimen>
     <dimen name="default_keyboard_height">250dp</dimen>
+    <dimen name="scan_result_size">24dp</dimen>
+    <dimen name="scan_result_margin">-24dp</dimen>
 </resources>

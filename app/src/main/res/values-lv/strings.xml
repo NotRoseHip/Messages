@@ -19,6 +19,9 @@
     </plurals>
     <string name="new_conversation">Jauna saruna</string>
     <string name="members">Dalībnieki</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
     <plurals name="delete_conversations">
         <item quantity="zero">%d sarunu</item>
         <item quantity="one">%d saruna</item>

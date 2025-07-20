@@ -19,4 +19,7 @@
     <string name="show_character_counter">Erakutsi karaktere-kontagailua mezuak idaztean</string>
     <string name="forward_message">Birbidali</string>
     <string name="compress_error">Ezin da irudia konprimitu hautatutako tamainara</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>

@@ -138,6 +138,7 @@ detekt {
 }
 
 dependencies {
+    implementation(libs.okhttp)
     implementation(libs.fossify.commons)
     implementation(libs.eventbus)
     implementation(libs.indicator.fast.scroll)
@@ -151,4 +152,5 @@ dependencies {
     implementation(libs.bundles.room)
     ksp(libs.androidx.room.compiler)
     detektPlugins(libs.compose.detekt)
+    implementation(kotlin("reflect"))
 }

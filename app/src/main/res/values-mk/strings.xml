@@ -2,4 +2,7 @@
 <resources>
     <string name="app_launcher_name">Пораки</string>
     <string name="type_a_message">Внеси порака…</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>

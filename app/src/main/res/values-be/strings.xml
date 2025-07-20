@@ -67,4 +67,7 @@
     <string name="faq_1_text">На жаль, гэта неабходна для адпраўкі ўкладанняў MMS. Немагчымасць адпраўляць MMS было б вельмі вялікім недахопам нашага прыкладання ў параўнанні з іншымі, таму было вырашана пайсці гэтым шляхам. Аднак, як і ў іншых нашых прыкладаннях, гэта не ўтрымлівае ніякай рэкламы, адсочвання і аналітыкі. Інтэрнэт выкарыстоўваецца толькі для адпраўкі MMS.</string>
     <string name="faq_2_title">Іншы бок не атрымлівае мае MMS, ці можна штосьці з гэтым зрабіць\?</string>
     <string name="faq_2_text">Памер MMS абмежаваны аператарамі сувязі, магчыма паспрабаваць зменьшыць ліміт у наладах прыкладання.</string>
-    </resources>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
+</resources>

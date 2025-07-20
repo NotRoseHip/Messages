@@ -116,4 +116,7 @@
     <string name="me">من</string>
     <string name="sender_only">فقط فرستنده</string>
     <string name="send_on_enter">ارسال پیام با کلید اینتر</string>
+    <string name="virus_total">VirusTotal</string>
+    <string name="use_virus_total_incoming_scan">Scan URLs in incoming messages with VirusTotal</string>
+    <string name="enter_virus_total_api_key">VirusTotal API Key</string>
 </resources>
