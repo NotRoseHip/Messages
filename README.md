@@ -6,6 +6,8 @@ This project is a fork of the Fossify Messages app project with an added functio
 
 ### Additions to the original app:
 
+This functionality requires an API key from a Virus Total account. (Free plan should be enough)
+
 - New settings section with :
     - Field for API key
     - Automatic scanning
