@@ -6,11 +6,11 @@ kotlinxSerializationJson = "1.9.0"
 ksp = "2.2.0-2.0.2"
 #Detekt
 detekt = "1.23.8"
-detektCompose = "0.4.22"
+detektCompose = "0.4.27"
 #AndroidX
 androidx-constraintlayout = "2.2.1"
 androidx-swiperefreshlayout = "1.1.0"
-androidx-lifecycleprocess = "2.8.7"
+androidx-lifecycleprocess = "2.9.4"
 #Eventbus
 eventbus = "3.3.1"
 #Room
@@ -20,7 +20,7 @@ commons = "5.7.0"
 android-smsmms = "c3e678befd"
 indicator-fast-scroll = "4524cd0b61"
 #Gradle
-gradlePlugins-agp = "8.11.1"
+gradlePlugins-agp = "8.13.0"
 #build
 app-build-compileSDKVersion = "34"
 app-build-targetSDK = "34"
