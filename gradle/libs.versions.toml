@@ -29,7 +29,7 @@ app-build-javaVersion = "VERSION_17"
 app-build-kotlinJVMTarget = "17"
 #Helpers
 ez-vcard = "0.12.1"
-okhttp = "5.1.0"
+okhttp = "5.3.2"
 shortcut-badger = "1.1.22"
 [libraries]
 #AndroidX
