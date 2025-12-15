@@ -14,7 +14,7 @@ androidx-lifecycleprocess = "2.9.4"
 #Eventbus
 eventbus = "3.3.1"
 #Room
-room = "2.7.2"
+room = "2.8.4"
 #Fossify
 commons = "5.7.0"
 android-smsmms = "c3e678befd"
